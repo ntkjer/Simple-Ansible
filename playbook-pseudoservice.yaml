@@ -1,0 +1,37 @@
+#Playbook file
+#Described for how a service would start on a larger collection of assets.
+-
+  name: Stop the web services on web server nodes
+  hosts: web_nodes
+  tasks:
+    -
+      name: Stop web services
+      command: service httpd stop
+-
+  name: Shutdown the database services on db server nodes
+  hosts: db_nodes
+  tasks:
+    -
+      name: Stop database services
+      command: service mysql stop
+-
+  name: Restart all servers at once
+  hosts: all_nodes
+  tasks:
+    -
+      name: Restart all servers 
+      command: /sbin/shutdown -r
+-
+  name: Start the database service on db server nodes
+  hosts: db_nodes
+  tasks:
+    -
+      name: Start db
+      command: service mysql start 
+-
+  name: Start the web services on web server nodes
+  hosts: web_nodes
+  tasks:
+    -
+      name: Start web services
+      command: service httpd start
